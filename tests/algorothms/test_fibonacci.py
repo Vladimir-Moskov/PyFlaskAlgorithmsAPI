@@ -22,3 +22,25 @@ def test_fibonacci_sequence(n: int, expected: int):
     :return:
     """
     assert fibonacci.fibonacci_sequence(n) == expected
+
+
+@pytest.mark.parametrize("n, expected", enumerate(fibonacci_values))
+def test_fibonacci_recursive(n: int, expected: int):
+    """
+    :param n:
+    :param expected:
+    :return:
+    """
+    assert fibonacci.fibonacci_recursive(n) == expected
+
+
+@pytest.mark.parametrize("n, expected", enumerate(fibonacci_values))
+def test_fibonacci_recursive_dp(n: int, expected: int):
+    """
+    :param n:
+    :param expected:
+    :return:
+    """
+    assert fibonacci.fibonacci_recursive_dp(n) == expected
+
+

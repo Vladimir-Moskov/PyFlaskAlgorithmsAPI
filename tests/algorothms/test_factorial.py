@@ -12,6 +12,11 @@ def test_factorial_math(n: int, expected: int):
 
 
 @pytest.mark.parametrize("n, expected", enumerate(factorial_values))
+def test_factorial_recursive(n: int, expected: int):
+    assert factorial.factorial_recursive(n) == expected
+
+
+@pytest.mark.parametrize("n, expected", enumerate(factorial_values))
 def test_factorial_sequence(n: int, expected: int):
     assert factorial.factorial_sequence(n) == expected
 

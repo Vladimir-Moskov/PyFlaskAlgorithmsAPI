@@ -2,8 +2,13 @@ from math import factorial
 
 
 def factorial_math(n: int) -> int:
-
     return factorial(n)
+
+
+def factorial_recursive(n: int) -> int:
+    if n == 0:
+        return 1
+    return factorial_recursive(n - 1) * n
 
 
 def factorial_sequence(n: int) -> int:
