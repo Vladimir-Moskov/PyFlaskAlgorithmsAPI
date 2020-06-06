@@ -1,8 +1,7 @@
 from flask_restful import Resource, reqparse, abort
-import ackermann
 import timeit
 
-parser = reqparse.RequestParser()
+parser = reqparse.RequestParser(bundle_errors=True)
 parser.add_argument('m', type=int, help='m is mandatory argument (m >= 0)', required=True, location='args')
 parser.add_argument('n', type=int, help='n is mandatory argument (n >= 0)', required=True, location='args')
 parser.add_argument('count', type=int, help='count is optional argument (count > 0, default count=1)', required=False, location='args')
@@ -19,6 +18,7 @@ def validate_args():
     count = 1
     if args["count"]:
         count = args["count"]
+        abort_if_arg_is_not_valid(count, "count")
     abort_if_arg_is_not_valid(m, "m")
     abort_if_arg_is_not_valid(n, "n")
     return m, n, count
@@ -26,27 +26,16 @@ def validate_args():
 
 class AckermannAPI(Resource):
 
+    def __init__(self, **kwargs):
+        self.strategy = kwargs["strategy"]
+
     def get(self):
         m, n, count = validate_args()
-        result, execution_time = timeit.timed(ackermann.ackermann, count, m, n)
+        result, execution_time = timeit.timed(self.strategy, count, m, n)
         return {
                     'status': 'success',
                     'data': result,
                     'execution_time': f"Execution time {execution_time} ms (millisecond)"
                 }, \
-            200, \
-            {'Access-Control-Allow-Origin': '*'}
-
-
-class AckermannDPAPI(Resource):
-
-    def get(self):
-        m, n, count = validate_args()
-        result, execution_time = timeit.timed(ackermann.ackermann_dp(), count, m, n)
-        return {
-                   'status': 'success',
-                   'data': result,
-                   'execution_time': f"Execution time {execution_time} ms (millisecond)"
-               }, \
             200, \
             {'Access-Control-Allow-Origin': '*'}
