@@ -16,7 +16,7 @@ algorithms:
  * The results per function should be calculated separately and user’s input should be
 validated.
 
-*You should also implement some monitoring of your choice where you can show the
+* You should also implement some monitoring of your choice where you can show the
 retrieval and display of the time it takes to calculate the different functions.
 
 # Deliverables
