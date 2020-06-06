@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, abort
-import factorial
+import fibonacci
 import timeit
 
 parser = reqparse.RequestParser()
@@ -22,11 +22,11 @@ def validate_args():
     return n, count
 
 
-class FactorialMathAPI(Resource):
+class FibonacciRecursiveAPI(Resource):
 
     def get(self):
         n, count = validate_args()
-        result, execution_time = timeit.timed(factorial.factorial_math, count, m)
+        result, execution_time = timeit.timed(fibonacci.fibonacci_recursive, count, n)
         return {
                     'status': 'success',
                     'data': result,
@@ -36,11 +36,11 @@ class FactorialMathAPI(Resource):
             {'Access-Control-Allow-Origin': '*'}
 
 
-class FactorialRecursiveAPI(Resource):
+class FibonacciRecursiveDpAPI(Resource):
 
     def get(self):
         n, count = validate_args()
-        result, execution_time = timeit.timed(factorial.factorial_recursive, count, m)
+        result, execution_time = timeit.timed(fibonacci.fibonacci_recursive_dp, count, n)
         return {
                     'status': 'success',
                     'data': result,
@@ -50,11 +50,11 @@ class FactorialRecursiveAPI(Resource):
             {'Access-Control-Allow-Origin': '*'}
 
 
-class FactorialSequenceAPI(Resource):
+class FibonacciFormulaAPI(Resource):
 
     def get(self):
         n, count = validate_args()
-        result, execution_time = timeit.timed(factorial.factorial_sequence, count, m)
+        result, execution_time = timeit.timed(fibonacci.fibonacci_formula, count, n)
         return {
                     'status': 'success',
                     'data': result,
@@ -64,11 +64,11 @@ class FactorialSequenceAPI(Resource):
             {'Access-Control-Allow-Origin': '*'}
 
 
-class FactorialDivAndConqAPI(Resource):
+class FibonacciSequenceAPI(Resource):
 
     def get(self):
         n, count = validate_args()
-        result, execution_time = timeit.timed(factorial.factorial_div_and_conq, count, m)
+        result, execution_time = timeit.timed(fibonacci.fibonacci_sequence, count, n)
         return {
                     'status': 'success',
                     'data': result,
