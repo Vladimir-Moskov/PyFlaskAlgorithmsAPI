@@ -1,13 +1,14 @@
 from flask import Flask
 from config import Config
-from ..algorithms import ackermann
+
+from algorithms import ackermann
 from algorithms import fibonacci
 from algorithms import factorial
 
 from flask_restful import reqparse, abort, Api, Resource
 from flask_cors import CORS
 
-from app.api_resources import ackermann_api, factorial_api, fibonacci_api
+from api_resources import ackermann_api, factorial_api, fibonacci_api
 
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
