@@ -1,10 +1,10 @@
 FROM python:3.7.3-alpine3.9
 
-USER algorithmsAPI
+RUN mkdir -p /home/algorithmsAPI/
 
 WORKDIR /home/algorithmsAPI/
 
-COPY --chown=algorithmsAPI:algorithmsAPI  . .
+COPY  . .
 
 RUN pip install --upgrade pip
 
@@ -14,4 +14,4 @@ EXPOSE 5000
 
 ENTRYPOINT [ "python" ]
 
-CMD [ "algorithms_api.py" ]
+CMD [ "app/algorithms_api.py" ]

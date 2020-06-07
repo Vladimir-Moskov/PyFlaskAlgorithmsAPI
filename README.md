@@ -1,5 +1,5 @@
-docker build -t algorithmsAPI-image .
-docker run --init --rm --publish 5000:5000 algorithmsAPI-image
+sudo docker build -t algorithms-api-image .
+sudo docker run --init --rm --publish 5000:5000 algorithms-api-image
 
 
 # SmartSteelPyFlaskCSV

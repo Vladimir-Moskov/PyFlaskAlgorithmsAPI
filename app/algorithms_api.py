@@ -1,6 +1,8 @@
 from flask import Flask
 from config import Config
-from algorithms import ackermann, fibonacci, factorial
+import ackermann
+import fibonacci
+import factorial
 
 from flask_restful import reqparse, abort, Api, Resource
 from flask_cors import CORS
