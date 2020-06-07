@@ -1,3 +1,7 @@
+docker build -t algorithmsAPI-image .
+docker run --init --rm --publish 5000:5000 algorithmsAPI-image
+
+
 # SmartSteelPyFlaskCSV
 # Here is solution ()
   0. Please, see Task statement in HOME_WORK.md

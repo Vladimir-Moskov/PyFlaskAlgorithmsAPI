@@ -1,37 +1,17 @@
-FROM python:3.7.3-alpine3.9 as base
+FROM python:3.7.3-alpine3.9
 
-FROM node:12-stretch
+USER algorithmsAPI
 
-USER python
+WORKDIR /home/algorithmsAPI/
 
-RUN mkdir -p /home/python/PyFlaskAlgorithmsAPI
+COPY --chown=algorithmsAPI:algorithmsAPI  . .
 
-WORKDIR /home/node/code
-
-COPY --chown=node:node package-lock.json package.json ./
-
-RUN npm ci
-
-COPY --chown=node:node . .
-
-EXPOSE 3000
-
-CMD ["node", "index.js"]
-
-RUN mkdir -p /PyFlaskAlgorithmsAPI/
-RUN mkdir -p /app/PyFlaskAlgorithmsAPI/app/
-RUN mkdir -p /app/PyFlaskAlgorithmsAPI/batch/
-RUN mkdir -p /app/PyFlaskAlgorithmsAPI/resource/
-
-WORKDIR /app/SmartSteelPyFlaskCSV/app/
-
-COPY ./requirements_flask.txt /app/SmartSteelPyFlaskCSV/app/requirements_flask.txt
 RUN pip install --upgrade pip
-RUN pip install -r requirements_flask.txt
-COPY ./app/ /app/SmartSteelPyFlaskCSV/app/
-COPY ./batch/ /app/SmartSteelPyFlaskCSV/batch/
-COPY ./resource/ /app/SmartSteelPyFlaskCSV/resource/
 
-ENV FLASK_APP=smart_steel_app.py
+RUN pip install -r requirements.txt
 
-CMD flask run -h 0.0.0.0 -p 5000
+EXPOSE 5000
+
+ENTRYPOINT [ "python" ]
+
+CMD [ "algorithms_api.py" ]
