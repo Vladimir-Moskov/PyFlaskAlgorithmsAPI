@@ -1,5 +1,5 @@
 from flask import Flask
-from .config import Config
+from config import Config
 from algorithms import ackermann
 from algorithms import fibonacci
 from algorithms import factorial
