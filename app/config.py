@@ -3,7 +3,7 @@
 """
 
 
-class Config():
+class Config:
     """
        applications general settings/variables
     """

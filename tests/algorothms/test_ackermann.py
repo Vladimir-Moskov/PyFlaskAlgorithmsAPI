@@ -1,4 +1,4 @@
-import ackermann
+import app.algorithms.ackermann as ackermann
 import pytest
 
 # MxN matrix

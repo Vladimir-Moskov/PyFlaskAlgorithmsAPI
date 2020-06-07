@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse, abort
 from algorithms import timeit
 
 parser = reqparse.RequestParser(bundle_errors=True)
-parser.add_argument('n', type=int, help='m is mandatory argument (n >= 0)', required=True, location='args')
+parser.add_argument('n', type=int, help='n is mandatory argument (n >= 0)', required=True, location='args')
 parser.add_argument('count', type=int, help='count is optional argument (count > 0, default count=1)', required=False, location='args')
 
 

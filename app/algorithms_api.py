@@ -10,19 +10,24 @@ from flask_cors import CORS
 
 from api_resources import ackermann_api, factorial_api, fibonacci_api
 
+import flask_monitoringdashboard as dashboard
+
+
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
 api = Api(app, prefix=Config.SERVER_NAME_API_APP)
 # add CORS for frontend cross domain policy
 cors = CORS(app)
 
-# http://127.0.0.1:5000//algorithms/api/v1/ackermann
+dashboard.bind(app)
+
+# http://127.0.0.1:5000/algorithms/api/v1/ackermann
 api.add_resource(ackermann_api.AckermannAPI, '/ackermann',  endpoint="ackermann", methods=['GET'],
                  resource_class_kwargs={'strategy': ackermann.ackermann})
 api.add_resource(ackermann_api.AckermannAPI, '/ackermann_dp',  endpoint="ackermann_dp", methods=['GET'],
                  resource_class_kwargs={'strategy': ackermann.ackermann_dp})
 
-# http://127.0.0.1:5000//algorithms/api/v1/factorial
+# http://127.0.0.1:5000/algorithms/api/v1/factorial
 api.add_resource(factorial_api.FactorialAPI, '/factorial_math',  endpoint="factorial_math", methods=['GET'],
                  resource_class_kwargs={'strategy': factorial.factorial_math})
 api.add_resource(factorial_api.FactorialAPI, '/factorial_recursive',  endpoint="factorial_recursive", methods=['GET'],
@@ -32,7 +37,7 @@ api.add_resource(factorial_api.FactorialAPI, '/factorial_sequence',  endpoint="f
 api.add_resource(factorial_api.FactorialAPI, '/factorial_div_and_conq',  endpoint="factorial_div_and_conq", methods=['GET'],
                  resource_class_kwargs={'strategy': factorial.factorial_div_and_conq})
 
-# http://127.0.0.1:5000//algorithms/api/v1/fibonacci
+# http://127.0.0.1:5000/algorithms/api/v1/fibonacci
 api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_formula',  endpoint="fibonacci_formula", methods=['GET'],
                  resource_class_kwargs={'strategy': fibonacci.fibonacci_formula})
 api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_sequence',  endpoint="fibonacci_sequence", methods=['GET'],
