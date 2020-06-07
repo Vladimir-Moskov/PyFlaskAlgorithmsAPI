@@ -43,4 +43,4 @@ api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive_dp',  endpoin
                  resource_class_kwargs={'strategy': fibonacci.fibonacci_recursive_dp})
 
 if __name__ == '__main__':
-    app.run(port=Config.PORT_API_APP, debug=Config.DEBUG_GLOBAL)
+    app.run(port=Config.PORT_API_APP, debug=Config.DEBUG_GLOBAL, host=Config.HOST_API_APP)
