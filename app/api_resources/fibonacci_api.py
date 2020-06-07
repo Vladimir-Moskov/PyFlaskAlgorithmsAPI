@@ -1,5 +1,4 @@
 from flask_restful import Resource, reqparse, abort
-import fibonacci
 import timeit
 
 parser = reqparse.RequestParser(bundle_errors=True)
