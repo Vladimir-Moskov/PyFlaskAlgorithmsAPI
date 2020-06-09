@@ -5,7 +5,10 @@ RUN mkdir -p /home/algorithmsAPI/
 
 WORKDIR /home/algorithmsAPI/
 
-RUN pip install --upgrade setuptools
+# workaround
+RUN apk add py-numpy
+# In the next step install it with pip.
+# RUN python -m pip install numpy
 
 RUN pip install --upgrade pip
 
