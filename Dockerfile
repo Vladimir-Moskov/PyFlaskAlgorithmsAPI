@@ -7,7 +7,8 @@ RUN mkdir -p /home/algorithmsAPI/
 WORKDIR /home/algorithmsAPI/
 
 # workaround
-# RUN apk add py-numpy
+RUN apk --no-cache add --virtual .builddeps gcc gfortran musl-dev
+RUN apk add py3-numpy
 # In the next step install it with pip.
 # RUN python -m pip install numpy
 
