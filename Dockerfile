@@ -1,6 +1,5 @@
+# Light weight Linux version - not much software needs to run the application
 FROM python:3.7.3-alpine3.9
-
-MAINTANER Volodymyr Moskov "boba.mockob@gmail.com"
 
 RUN mkdir -p /home/algorithmsAPI/
 
