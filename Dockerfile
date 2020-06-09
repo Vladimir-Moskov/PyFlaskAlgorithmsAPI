@@ -1,5 +1,5 @@
 # Light weight Linux version - not much software needs to run the application
-FROM python:3.7.3-alpine3.9
+FROM python:3.7.7-alpine3.12
 
 RUN mkdir -p /home/algorithmsAPI/
 
