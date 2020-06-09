@@ -1,25 +1,22 @@
-from flask import Flask
+"""
+   Algorithms Wep API application / main file / entry point,
+   with creation Flask app, set up dashboard and configure routing map
+"""
+
 from config import Config
 
 from algorithms import ackermann
 from algorithms import fibonacci
 from algorithms import factorial
 
-from flask_restful import reqparse, abort, Api, Resource
-from flask_cors import CORS
+from app import app
+from app import api
 
 from api_resources import ackermann_api, factorial_api, fibonacci_api
 
-import flask_monitoringdashboard as dashboard
 
 
-app = Flask(__name__)
-app.config['BUNDLE_ERRORS'] = True
-api = Api(app, prefix=Config.SERVER_NAME_API_APP)
-# add CORS for frontend cross domain policy
-cors = CORS(app)
-
-dashboard.bind(app)
+# Routing ##############################
 
 # http://127.0.0.1:5000/algorithms/api/v1/ackermann
 api.add_resource(ackermann_api.AckermannAPI, '/ackermann',  endpoint="ackermann", methods=['GET'],
@@ -47,5 +44,9 @@ api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive',  endpoint="
 api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive_dp',  endpoint="fibonacci_recursive_dp", methods=['GET'],
                  resource_class_kwargs={'strategy': fibonacci.fibonacci_recursive_dp})
 
+#####################################################################3
+
+
+# run it as server (for development server mod)
 if __name__ == '__main__':
     app.run(port=Config.PORT_API_APP, debug=Config.DEBUG_GLOBAL, host=Config.HOST_API_APP)

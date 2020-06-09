@@ -30,7 +30,17 @@ class FibonacciAPI(Resource):
 
     def get(self):
         n, count = validate_args()
-        result, execution_time = timeit.timed(self.strategy, count, n)
+        try:
+            result, execution_time = timeit.timed(self.strategy, count, n)
+        except Exception as error:
+            return {
+                       'status': 'success',
+                       'data': result,
+                       'error': f"The current request can not be processed because {repr(error)}"
+                   }, \
+                   400, \
+                   {'Access-Control-Allow-Origin': '*'}
+
         return {
                     'status': 'success',
                     'data': result,

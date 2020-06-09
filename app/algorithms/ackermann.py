@@ -26,7 +26,7 @@ def ackermann(m: int, n: int) -> int:
 
 def ackermann_dp(m: int, n: int) -> int:
     """
-        Direct Implementation of Ackermann function - recursive approach with 'cash',
+        Direct Implementation of Ackermann function - recursive approach with 'cache',
         dp stands for Dynamic Programming
 
         :param m: m >= 0, stands for first argument (m) of Ackermann function

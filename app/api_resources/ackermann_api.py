@@ -1,3 +1,7 @@
+"""
+
+"""
+
 from flask_restful import Resource, reqparse, abort
 from algorithms import timeit
 
@@ -9,6 +13,8 @@ parser.add_argument('count', type=int, help='count is optional argument (count >
 
 def abort_if_arg_is_not_valid(arg_value: int, arg_name: str):
     if arg_value < 0:
+        #message = f"The value of {arg_name} = {arg_value} is not valid. It should be NOT less then zero"
+        #app.logger.error(message)
         abort(404, message=f"The value of {arg_name} = {arg_value} is not valid. It should be NOT less then zero")
 
 
@@ -31,7 +37,18 @@ class AckermannAPI(Resource):
 
     def get(self):
         m, n, count = validate_args()
+        # try:
         result, execution_time = timeit.timed(self.strategy, count, m, n)
+        # except Exception as error:
+        #     #app.logger.error(f'PyFlaskAlgorithmsAPI - AckermannAPI {self.strategy.__name__} {repr(error)}')
+        #     return {
+        #                'status': 'success',
+        #                'data': result,
+        #                'error': f"AckermannAPI - The current request can not be processed because problem in {self.strategy.__name__}"
+        #            }, \
+        #            400, \
+        #            {'Access-Control-Allow-Origin': '*'}
+
         return {
                     'status': 'success',
                     'data': result,

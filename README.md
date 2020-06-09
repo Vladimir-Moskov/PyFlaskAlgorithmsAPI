@@ -9,7 +9,7 @@
   5. simple flask-monitoringdashboard library has been used as "monitoring of my choice"
      (for mo details see https://flask-monitoringdashboard.readthedocs.io/en/latest/index.html
                          https://github.com/flask-dashboard/Flask-MonitoringDashboard)
-  6. No any cash has been implemented to store previously calculated data, web API is stateless
+  6. No any cache has been implemented to store previously calculated data, web API is stateless
      (according to requirement - "The results per function should be calculated separately")
 
 ## From point of view MVP (Minimum Valuable Product)

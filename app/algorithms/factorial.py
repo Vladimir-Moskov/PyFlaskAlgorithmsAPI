@@ -31,6 +31,13 @@ def factorial_recursive(n: int) -> int:
 
 
 def factorial_sequence(n: int) -> int:
+    """
+       Simple sequential calculation of Factorial function
+
+       :param n: n >= 0, stands for first argument (n) of Factorial function
+       :return: Factorial function value for given argument
+     """
+
     iteration = 1
     result = 1
     while iteration <= n:
@@ -40,10 +47,28 @@ def factorial_sequence(n: int) -> int:
 
 
 def factorial_div_and_conq(n):
+    """
+       Not really Simple divide-and-conquered algorithm for calculation of Factorial function
+       The faster way to calculate factorial for big numbers, the idea is to minimize values in
+       multiplication, because multiplication of smaller numbers is much faster the operate over large
+       values.
+        ( line 1845 on
+        https://github.com/python/cpython/blob/master/Modules/mathmodule.c)
+
+       :param n: n >= 0, stands for first argument (n) of Factorial function
+       :return: Factorial function value for given argument
+    """
     return _multiply_range(1, n)
 
 
-def _multiply_range(n, m):
+def _multiply_range(n: int, m: int):
+    """
+        Recursive helper function - part of implementation divide-and-conquered algorithm
+
+        :param n: start - from value
+        :param m: end - to value
+        :return: computation result of multiplication's from n to m
+    """
     if n == m:
         return n
     if m < n:
