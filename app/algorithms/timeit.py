@@ -1,3 +1,8 @@
+"""
+    Time / performance measure utils
+
+"""
+
 import time
 
 

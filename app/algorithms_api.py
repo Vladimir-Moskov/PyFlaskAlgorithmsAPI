@@ -1,6 +1,6 @@
 """
    Algorithms Wep API application / main file / entry point,
-   with creation Flask app, set up dashboard and configure routing map
+   with configure routing map and application server start up
 """
 
 from config import Config
@@ -13,7 +13,6 @@ from app import app
 from app import api
 
 from api_resources import ackermann_api, factorial_api, fibonacci_api
-
 
 
 # Routing ##############################
@@ -49,4 +48,5 @@ api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive_dp',  endpoin
 
 # run it as server (for development server mod)
 if __name__ == '__main__':
+    app.logger.info('PyFlaskAlgorithmsAPI - web API startup')
     app.run(port=Config.PORT_API_APP, debug=Config.DEBUG_GLOBAL, host=Config.HOST_API_APP)

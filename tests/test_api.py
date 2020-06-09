@@ -1,10 +1,10 @@
-import os
-import tempfile
+
+from config import Config
+Config.TESTING = True
 
 import pytest
-
 from algorithms_api import app
-from config import Config
+
 
 ackermann_strategies = ["ackermann", "ackermann_dp"]
 factorial_strategies = ["factorial_math", "factorial_recursive", "factorial_sequence", "factorial_div_and_conq"]
@@ -13,8 +13,6 @@ fibonacci_strategies = ["fibonacci_formula", "fibonacci_sequence", "fibonacci_re
 
 @pytest.fixture
 def client():
-    app.config['TESTING'] = True
-
     with app.test_client() as client:
         yield client
 

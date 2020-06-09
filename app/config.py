@@ -24,6 +24,9 @@ class Config:
     LOG_SIZE = 10240
     LOG_BACKUP_COUNT = 10
 
+    # to avoid creation of logging and monitoring dashboard for tests
+    TESTING = False
+
 
 
 

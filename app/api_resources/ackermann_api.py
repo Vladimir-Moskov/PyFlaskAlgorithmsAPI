@@ -4,6 +4,7 @@
 
 from flask_restful import Resource, reqparse, abort
 from algorithms import timeit
+from app import app
 
 parser = reqparse.RequestParser(bundle_errors=True)
 parser.add_argument('m', type=int, help='m is mandatory argument (m >= 0)', required=True, location='args')
@@ -13,9 +14,9 @@ parser.add_argument('count', type=int, help='count is optional argument (count >
 
 def abort_if_arg_is_not_valid(arg_value: int, arg_name: str):
     if arg_value < 0:
-        #message = f"The value of {arg_name} = {arg_value} is not valid. It should be NOT less then zero"
-        #app.logger.error(message)
-        abort(404, message=f"The value of {arg_name} = {arg_value} is not valid. It should be NOT less then zero")
+        message = f"The value of {arg_name} = {arg_value} is not valid. It should be NOT less then zero"
+        app.logger.error(message)
+        abort(404, message=message)
 
 
 def validate_args():
@@ -37,17 +38,18 @@ class AckermannAPI(Resource):
 
     def get(self):
         m, n, count = validate_args()
-        # try:
-        result, execution_time = timeit.timed(self.strategy, count, m, n)
-        # except Exception as error:
-        #     #app.logger.error(f'PyFlaskAlgorithmsAPI - AckermannAPI {self.strategy.__name__} {repr(error)}')
-        #     return {
-        #                'status': 'success',
-        #                'data': result,
-        #                'error': f"AckermannAPI - The current request can not be processed because problem in {self.strategy.__name__}"
-        #            }, \
-        #            400, \
-        #            {'Access-Control-Allow-Origin': '*'}
+        try:
+            result, execution_time = timeit.timed(self.strategy, count, m, n)
+        except Exception as error:
+            app.logger.error(f'PyFlaskAlgorithmsAPI - {self.__name__} {self.strategy.__name__} {repr(error)}')
+            return {
+                       'status': 'success',
+                       'data': result,
+                       'error': f"AckermannAPI - The current request can not be processed because problem in "
+                                f"{self.strategy.__name__}"
+                   }, \
+                   400, \
+                   {'Access-Control-Allow-Origin': '*'}
 
         return {
                     'status': 'success',
