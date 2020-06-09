@@ -1,12 +1,13 @@
 # Light weight Linux version - not much software needs to run the application
-FROM python:3.7.7-alpine3.12
+# FROM python:3.7.7-alpine3.12
+FROM python:slim
 
 RUN mkdir -p /home/algorithmsAPI/
 
 WORKDIR /home/algorithmsAPI/
 
 # workaround
-RUN apk add py-numpy
+# RUN apk add py-numpy
 # In the next step install it with pip.
 # RUN python -m pip install numpy
 
