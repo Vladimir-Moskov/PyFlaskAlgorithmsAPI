@@ -5,6 +5,8 @@ RUN mkdir -p /home/algorithmsAPI/
 
 WORKDIR /home/algorithmsAPI/
 
+RUN pip install --upgrade setuptools
+
 RUN pip install --upgrade pip
 
 COPY requirements.txt requirements.txt
