@@ -26,5 +26,5 @@ ENTRYPOINT [ "python" ]
 # CMD [ "app/algorithms_api.py" ]
 CMD gunicorn --workers 4 \
   --threads 16 \
-  --bind 0.0.0.0:500 \
+  --bind 0.0.0.0:5000 \
   app/app:app
