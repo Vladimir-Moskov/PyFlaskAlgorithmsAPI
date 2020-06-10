@@ -19,6 +19,8 @@ RUN pip install gunicorn
 
 COPY  ./webAPI .
 
+RUN chmod -R 777 .
+
 ENV FLASK_APP=algorithms_api.py
 
 EXPOSE 5000
