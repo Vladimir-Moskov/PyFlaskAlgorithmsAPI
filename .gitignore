@@ -131,3 +131,4 @@ dmypy.json
 /tests/flask_monitoringdashboard.db
 /flask_monitoringdashboard.db
 /webAPI/flask_monitoringdashboard.db
+/.idea/
