@@ -37,6 +37,7 @@
 
         > sudo docker build -t algorithms-api-image .
                 docker build -t algorithms-api-image-dev -f dev.Dockerfile .
+                docker build -t algorithms-api-image-async -f async-gevent.Dockerfile .
 
     4. Run docker image with web api application running on it
         > sudo docker run --init --rm --publish 5000:5000 algorithms-api-image
@@ -45,6 +46,7 @@
                docker run --name algorithms-api-image -p 5000:5000 --rm algorithms-api-image
 
                docker run --init --rm --publish 5000:5000 algorithms-api-image-dev
+               docker run --init --rm --publish 5000:5000 algorithms-api-image-async
     5. In case permission issue - your user not in sudo group, run previous commands without sudo
 
 

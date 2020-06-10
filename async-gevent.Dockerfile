@@ -9,6 +9,9 @@ WORKDIR /home/algorithmsAPI/webAPI
 # Install native libraries, required for numpy
 RUN apk --no-cache add musl-dev linux-headers g++
 
+#  workaround to install gevent for alpine
+RUN apk add --no-cache python3-dev libffi-dev gcc musl-dev make
+
 RUN pip install --upgrade pip
 
 COPY requirements.txt requirements.txt
@@ -23,9 +26,7 @@ ENV FLASK_APP=algorithms_api.py
 
 EXPOSE 5000
 
-CMD pwd && gunicorn \
+CMD gunicorn --worker-class gevent \
   --workers 4 \
-  --threads 16 \
   --bind 0.0.0.0:5000 \
   algorithms_api:app
-

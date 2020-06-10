@@ -7,4 +7,5 @@ from gevent import monkey
 monkey.patch_all()
 
 # re-export
-import algorithms_api
+from app import app
+# import algorithms_api

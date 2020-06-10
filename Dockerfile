@@ -23,7 +23,7 @@ ENV FLASK_APP=algorithms_api.py
 
 EXPOSE 5000
 
-CMD pwd && gunicorn \
+CMD gunicorn \
   --workers 4 \
   --threads 16 \
   --bind 0.0.0.0:5000 \
