@@ -36,10 +36,15 @@
     3. Build docker image, by default it take Dockerfile from current directory for build
 
         > sudo docker build -t algorithms-api-image .
+                docker build -t algorithms-api-image-dev -f dev.Dockerfile .
 
     4. Run docker image with web api application running on it
         > sudo docker run --init --rm --publish 5000:5000 algorithms-api-image
-               docker run --name app -d -p 5000:5000 --rm algorithms-api-image
+               docker run --name algorithms-api-image -d -p 5000:5000 --rm algorithms-api-image
+
+               docker run --name algorithms-api-image -p 5000:5000 --rm algorithms-api-image
+
+               docker run --init --rm --publish 5000:5000 algorithms-api-image-dev
     5. In case permission issue - your user not in sudo group, run previous commands without sudo
 
 
@@ -87,10 +92,12 @@
  ### Start web api application
 
     1.  Here is where application located -
-        > PyFlaskAlgorithmsAPI/app
+        > PyFlaskAlgorithmsAPI/webAPI
 
     2. Run it with
-       >  python PyFlaskAlgorithmsAPI/app/algorithms_api.py
+       >  python PyFlaskAlgorithmsAPI/webAPI/algorithms_api.py
+       or just
+       >  python webAPI/algorithms_api.py
 
     3. application will be started on default HOST and PORT
 

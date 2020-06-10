@@ -15,17 +15,13 @@ COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
 
-RUN pip install gunicorn
-
 COPY  ./webAPI .
-
-ENV FLASK_APP=algorithms_api.py
 
 EXPOSE 5000
 
-CMD pwd && gunicorn \
-  --workers 4 \
-  --threads 16 \
-  --bind 0.0.0.0:5000 \
-  algorithms_api:app
+ENTRYPOINT [ "python" ]
+
+CMD [ "algorithms_api.py" ]
+
+
 

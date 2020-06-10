@@ -46,3 +46,5 @@ if app.config['TESTING'] == False:
     app.logger.setLevel(logging.INFO)
 
 from . import routes
+
+
