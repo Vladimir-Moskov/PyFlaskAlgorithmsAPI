@@ -8,7 +8,7 @@ from logging.handlers import RotatingFileHandler
 import logging
 
 from flask import Flask
-from config import Config
+from .config import Config
 
 from flask_restful import Api
 from flask_cors import CORS
@@ -44,3 +44,5 @@ if app.config['TESTING'] == False:
     app.logger.addHandler(file_handler)
 
     app.logger.setLevel(logging.INFO)
+
+from . import routes

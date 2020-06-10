@@ -1,16 +1,14 @@
 """
-    AckermannAPI - middle layer / interface which expose / map
+    FibonacciAPI - middle layer / interface which expose / map
     algorithms implementasion to wep api
 """
-
 from flask_restful import Resource, reqparse, abort
-from algorithms import timeit
+from app.algorithms import timeit
 from app import app
-from typing import Dict, Union, Tuple, Any, Optional
+from typing import Dict, Union, Tuple, Any
 
 # arguments parsing and validation rules
 parser = reqparse.RequestParser(bundle_errors=True)
-parser.add_argument('m', type=int, help='m is mandatory argument (m >= 0)', required=True, location='args')
 parser.add_argument('n', type=int, help='n is mandatory argument (n >= 0)', required=True, location='args')
 parser.add_argument('count', type=int, help='count is optional argument (count > 0, default count=1)', required=False, location='args')
 
@@ -29,26 +27,26 @@ def abort_if_arg_is_not_valid(arg_value: int, arg_name: str) -> None:
         abort(404, message=message)
 
 
-def validate_args() -> Tuple[int, int, int]:
+def validate_args() -> Tuple[int, int]:
     """
          Perform all arguments validation, according to logic and requirements
 
         :return: arguments itself in case all of them are valid
     """
     args = parser.parse_args()
-    m, n = args["m"], args["n"]
+    n = args["n"]
     count = 1
     if args["count"]:
         count = args["count"]
         abort_if_arg_is_not_valid(count, "count")
-    abort_if_arg_is_not_valid(m, "m")
     abort_if_arg_is_not_valid(n, "n")
-    return m, n, count
+
+    return n, count
 
 
-class AckermannAPI(Resource):
+class FibonacciAPI(Resource):
     """
-        Flask-Restful class for Ackermann algorithms http request handling
+        Flask-Restful class for Fibonacci algorithms http request handling
     """
 
     def __init__(self, **kwargs) -> None:
@@ -56,20 +54,20 @@ class AckermannAPI(Resource):
 
     def get(self) -> Tuple[Dict[str, Union[str, Any]], int, Dict[str, str]]:
         """
-            Apply specific implementasion of Ackermann algorithm (as self.strategy)
+            Apply specific implementasion of Fibonacci algorithm (as self.strategy)
             over passed url arguments (arguments shoul respect name convention)
 
             :return: dict / json as result of calculation
         """
-        m, n, count = validate_args()
+        n, count = validate_args()
         try:
-            result, execution_time = timeit.timed(self.strategy, count, m, n)
+            result, execution_time = timeit.timed(self.strategy, count, n)
         except Exception as error:
             app.logger.error(f'PyFlaskAlgorithmsAPI - {self.__name__} {self.strategy.__name__} {repr(error)}')
             return {
-                       'status': 'fail',
-                       'error': f"AckermannAPI - The current request can not be processed because problem in "
-                                f"{self.strategy.__name__}"
+                       'status': 'success',
+                       'data': result,
+                       'error': f"The current request can not be processed because {repr(error)}"
                    }, \
                    400, \
                    {'Access-Control-Allow-Origin': '*'}

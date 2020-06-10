@@ -5,7 +5,7 @@
 
 
 from flask_restful import Resource, reqparse, abort
-from algorithms import timeit
+from app.algorithms import timeit
 from app import app
 from typing import Dict, Union, Tuple, Any
 

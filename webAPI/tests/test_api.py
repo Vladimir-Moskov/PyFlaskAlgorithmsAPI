@@ -3,7 +3,7 @@
 
     for now, only simple-positive test cases has been implemented
 """
-from config import Config
+from app.config import Config
 # set application in state for testing (turn off logging and monitoring dashboard)
 Config.TESTING = True
 

@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /app/flask_monitoringdashboard.db
 /tests/flask_monitoringdashboard.db
+/flask_monitoringdashboard.db
+/webAPI/flask_monitoringdashboard.db

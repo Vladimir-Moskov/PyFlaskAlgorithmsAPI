@@ -1,18 +1,16 @@
-"""
-   Algorithms Wep API application / main file / entry point,
-   with configure routing map and application server start up
-"""
 
-from config import Config
+from app.config import Config
 
-from algorithms import ackermann
-from algorithms import fibonacci
-from algorithms import factorial
+from app.algorithms import ackermann
+from app.algorithms import fibonacci
+from app.algorithms import factorial
 
-from app import app
-from app import api
+from app.app import app
+from app.app import api
 
-from api_resources import ackermann_api, factorial_api, fibonacci_api
+from app.api_resources import ackermann_api
+from app.api_resources import factorial_api
+from app.api_resources import fibonacci_api
 
 
 # Routing ##############################
@@ -43,10 +41,4 @@ api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive',  endpoint="
 api.add_resource(fibonacci_api.FibonacciAPI, '/fibonacci_recursive_dp',  endpoint="fibonacci_recursive_dp", methods=['GET'],
                  resource_class_kwargs={'strategy': fibonacci.fibonacci_recursive_dp})
 
-#####################################################################3
-
-
-# run it as server (for development server mod)
-if __name__ == '__main__':
-    app.logger.info('PyFlaskAlgorithmsAPI - web API startup')
-    app.run(port=Config.PORT_API_APP, debug=Config.DEBUG_GLOBAL, host=Config.HOST_API_APP)
+#####################################################################
