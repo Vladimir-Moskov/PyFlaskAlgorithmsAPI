@@ -34,8 +34,12 @@ if app.config['TESTING'] == False:
 
 # create and set up simple logging
 if app.config['TESTING'] == False:
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
+    try:
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+    except Exception as error:
+        print(repr(error))
+
     file_handler = RotatingFileHandler(Config.LOG_DIRRECTORY, maxBytes=Config.LOG_SIZE,
                                                backupCount=Config.LOG_BACKUP_COUNT)
     file_handler.setFormatter(logging.Formatter(
