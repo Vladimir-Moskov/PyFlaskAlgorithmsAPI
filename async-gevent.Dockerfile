@@ -1,3 +1,4 @@
+# run application with gunicorn server (asynchronous version) - for real life usage (prod)
 # Light weight Linux version - not much software needs to run the application
 FROM python:3.7.7-alpine3.12
 
@@ -18,6 +19,8 @@ COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
 
+# add web server gunicorn to run application
+# add gevent as async layer
 RUN pip install gunicorn gevent
 
 COPY  ./webAPI .
@@ -26,6 +29,7 @@ ENV FLASK_APP=algorithms_api.py
 
 EXPOSE 5000
 
+# start application
 CMD gunicorn --worker-class gevent \
   --workers 4 \
   --bind 0.0.0.0:5000 \

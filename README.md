@@ -1,11 +1,11 @@
-
 # PyFlaskAlgorithmsAPI
-# Here is solution ()
+
+## Here is solution
   0. Please, see Task statement in TaskRequarments.md
   1. Flask framework with Flask-Restfull has been used to implement task web api.
-  2. Web api source code in app/ directory
-  3. Implementation of algorithms in app/algorithms directory
-  4. Unit tests for algorithms in tests/algorithms directory.
+  2. Web api source code in webAPI/app/ directory
+  3. Implementation of algorithms in webAPI/app/algorithms directory
+  4. Unit tests for algorithms in webAPI/tests/algorithms directory.
   5. simple flask-monitoringdashboard library has been used as "monitoring of my choice"
      (for mo details see https://flask-monitoringdashboard.readthedocs.io/en/latest/index.html
                          https://github.com/flask-dashboard/Flask-MonitoringDashboard)
@@ -14,14 +14,14 @@
 
 ## From point of view MVP (Minimum Valuable Product)
 
-1. For simplicity - logging has not been added
+1. For simplicity - only basic logging has been added
 
-2. For simplicity - unit tests and integration tests has not been implemented on 100%
+2. For simplicity - unit tests and integration tests has not been implemented on 100%, only simple test cases
 
 3. For simplicity - there is no any authorization/security
 > TODO: implement it
 
-4. Error handling have not been done properly
+4. Error handling have not been done on full scale
 > TODO: implement it
 
 ## Project setup steps (with Docker)
@@ -34,19 +34,25 @@
         >  cd   your_local_directory/PyFlaskAlgorithmsAPI
 
     3. Build docker image, by default it take Dockerfile from current directory for build
+        Depends on what service environment you want to use:
 
         > sudo docker build -t algorithms-api-image .
-                docker build -t algorithms-api-image-dev -f dev.Dockerfile .
-                docker build -t algorithms-api-image-async -f async-gevent.Dockerfile .
+        or
+        > sudo docker build -t algorithms-api-image-dev -f dev.Dockerfile .
+        or
+        > sudo docker build -t algorithms-api-image-async -f async-gevent.Dockerfile .
 
     4. Run docker image with web api application running on it
+        Depends on what service environment you want to use:
         > sudo docker run --init --rm --publish 5000:5000 algorithms-api-image
-               docker run --name algorithms-api-image -d -p 5000:5000 --rm algorithms-api-image
+        or
+        > docker run --init --rm --publish 5000:5000 algorithms-api-image-dev
+        or
+        > docker run --init --rm --publish 5000:5000 algorithms-api-image-async
 
-               docker run --name algorithms-api-image -p 5000:5000 --rm algorithms-api-image
 
-               docker run --init --rm --publish 5000:5000 algorithms-api-image-dev
-               docker run --init --rm --publish 5000:5000 algorithms-api-image-async
+        > docker run --name algorithms-api-image -d -p 5000:5000 --rm algorithms-api-image
+
     5. In case permission issue - your user not in sudo group, run previous commands without sudo
 
 
@@ -94,7 +100,7 @@
  ### Start web api application
 
     1.  Here is where application located -
-        > PyFlaskAlgorithmsAPI/webAPI
+        > PyFlaskAlgorithmsAPI/webAPI/
 
     2. Run it with
        >  python PyFlaskAlgorithmsAPI/webAPI/algorithms_api.py
@@ -105,25 +111,24 @@
 
         > http://localhost:5000/
 
-
     4. The flowing API endpoints will be exposed to execute corespondent algorithms:
+        (ip may be different - 127.0.0.1, localhost, depends where you deploy and how you asses web API)
+        ### Ackermann algorithm
+             http://192.168.2.21:5000/algorithms/api/v1/ackermann?m=3&n=4&count=100
+             http://192.168.2.21:5000/algorithms/api/v1/ackermann_dp?m=3&n=4&count=100
 
+        ### Factorial algorithm
+            http://192.168.2.21:5000/algorithms/api/v1/factorial_math?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/factorial_recursive?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/factorial_sequence?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/factorial_div_and_conq?n=40&count=100
 
-       http://192.168.2.21:5000/algorithms/api/v1/ackermann?m=3&n=4&count=100
-       http://192.168.2.21:5000/algorithms/api/v1/ackermann_dp?m=3&n=4&count=100
-
-        http://192.168.2.21:5000/algorithms/api/v1/factorial_math?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/factorial_recursive?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/factorial_sequence?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/factorial_div_and_conq?n=40&count=100
-
-        http://192.168.2.21:5000/algorithms/api/v1/fibonacci_formula?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/fibonacci_sequence?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/fibonacci_recursive?n=40&count=100
-        http://192.168.2.21:5000/algorithms/api/v1/fibonacci_recursive_dp?n=40&count=100
+        ### Fibonacci algorithm
+            http://192.168.2.21:5000/algorithms/api/v1/fibonacci_formula?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/fibonacci_sequence?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/fibonacci_recursive?n=40&count=100
+            http://192.168.2.21:5000/algorithms/api/v1/fibonacci_recursive_dp?n=40&count=100
 
     5. Web API monitoring will be available (Use the credentials u:admin, p:admin to log in.)
           - Log into the Dashboard at: http://localhost:5000/dashboard/login
           - Go to the Overview tab in the left menu: http://localhost:5000/dashboard/overview
-
-

@@ -1,3 +1,4 @@
+# run application as stand alon server - for development needs only
 # Light weight Linux version - not much software needs to run the application
 FROM python:3.7.7-alpine3.12
 
